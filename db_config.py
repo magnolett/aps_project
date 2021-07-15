@@ -26,3 +26,4 @@ class Passageiro(Model):
 db.connect()
 db.create_tables([Passageiro])
 
+"Teste Alterei Gustavo"
