@@ -16,18 +16,20 @@ email = values['email']
 cpf = values['cpf']
 #print('nome = ',nome, senha)
 deu_certo = True
-
-if nome == '' or senha == '' or data == '' or numero == '' or cpf == '':
-    print('preencha todos os dados obrigatórios')
-    deu_certo = False
-for passageiros in dic_passageiros.values():
-    if  passageiros.numero == numero or passageiros.cpf == cpf:
-        print('numero ou cpf repetido')
+if botoes == 0:
+    print('encerrando')
+else:
+    if nome == '' or senha == '' or data == '' or numero == '' or cpf == '':
+        print('preencha todos os dados obrigatórios')
         deu_certo = False
-if deu_certo == True:
-    novo_passageiro = Passageiro(values['nome'], values['senha'], values['data'], values['numero'], values['email'], values['cpf'])
-    dic_passageiros[values['numero']] = novo_passageiro
-    print(dic_passageiros)
+    for passageiros in dic_passageiros.values():
+        if  passageiros.numero == numero or passageiros.cpf == cpf:
+            print('numero ou cpf repetido')
+            deu_certo = False
+    if deu_certo == True:
+        novo_passageiro = Passageiro(values['nome'], values['senha'], values['data'], values['numero'], values['email'], values['cpf'])
+        dic_passageiros[values['numero']] = novo_passageiro
+        print(dic_passageiros)
 
 
 #pass_antes = dic_passageiros[99]
