@@ -1,15 +1,12 @@
-import pymysql
-from pessoa import Pessoa
 from playhouse.mysql_ext import MySQLConnectorDatabase
-from peewee import BooleanField, IntegerField, Model, MySQLDatabase, TextField
-#from pessoa import Pessoa
+from peewee import BooleanField, IntegerField, Model, TextField
 
 db = MySQLConnectorDatabase('db_aps', host='localhost', port=3306, user='root', password='root')
 #db = MySQLDatabase('db_aps', host='localhost', port=3306, user='root', password='root')
 
 class Passageiro(Model):
     name=TextField
-    cpf=IntegerField
+    cpf=IntegerField(primary_key=True)
     ativo=BooleanField
 
     def __init__(self, nome, cpf, ativo:bool):
@@ -26,4 +23,3 @@ class Passageiro(Model):
 db.connect()
 db.create_tables([Passageiro])
 
-"Teste Alterei Gustavo"
