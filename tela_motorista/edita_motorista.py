@@ -1,4 +1,5 @@
-from sys import modules 
+from sys import modules
+from motorista import Motorista 
 import PySimpleGUI as sg
 from abstract_tela import AbstractTela
 
@@ -33,6 +34,26 @@ class TelaEditaMotorista(AbstractTela):
     def abrir(self):
         button, values = super().abrir()
         return button, values
+
+    def trazVariavel(cpf, nomeVariavel):
+        if nomeVariavel == 'cpf':
+                return Motorista.get(Motorista.cpf == cpf).cpf
+        elif nomeVariavel == 'nome':
+                return Motorista.get(Motorista.cpf == cpf).nome
+        elif nomeVariavel == 'senha':
+                return Motorista.get(Motorista.cpf == cpf).senha
+        elif nomeVariavel == 'cnh':
+                return Motorista.get(Motorista.cpf == cpf).cnh
+        elif nomeVariavel == 'dtNascimento':
+                return Motorista.get(Motorista.cpf == cpf).dtNascimento
+        elif nomeVariavel == 'numero':
+                return Motorista.get(Motorista.cpf == cpf).numero
+        elif nomeVariavel == 'email':
+                return Motorista.get(Motorista.cpf == cpf).email
+        elif nomeVariavel == 'modeloVeiculo':
+                return Motorista.get(Motorista.cpf == cpf).modeloVeiculo
+        elif nomeVariavel == 'anoVeiculo':
+                return Motorista.get(Motorista.cpf == cpf).anoVeiculo
 
 #a = TelaEditaPassageiro(1)
 #a.abrir()
