@@ -1,4 +1,4 @@
-from peewee import DateField, IntegerField, Model, TextField
+from peewee import BigIntegerField, BooleanField, DateField, IntegerField, Model, TextField
 from playhouse.mysql_ext import MySQLConnectorDatabase
 
 db = MySQLConnectorDatabase('db_aps', host='localhost', port=3306, user='root', password='root')
@@ -22,8 +22,9 @@ class Motorista(Model):
     cnh=TextField()
     dtNascimento=DateField()
     numero=IntegerField()
-    cpf=IntegerField(primary_key=True)
-    email=TextField()
+    cpf=BigIntegerField(primary_key=True)
+    email=TextField(default=True)
+    ativo=BooleanField()
     modeloVeiculo=TextField()
     anoVeiculo=IntegerField()
     
