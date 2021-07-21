@@ -1,5 +1,4 @@
 import PySimpleGUI as sg
-
 from abstract_tela import AbstractTela
 
 
