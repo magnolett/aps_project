@@ -1,8 +1,9 @@
 from cadastra_passageiro import TelaCadastraPassageiro
 from edita_passageiro import TelaEditaPassageiro
 from passageiro import Passageiro
+from datetime import date, timedelta
 
-pass1 = Passageiro('vini', '123', '00', '10', '000','email')
+pass1 = Passageiro('vini', '123', '00', '123456789', '000','email')
 pass2 = Passageiro('matheus', '123', '33', '99', '100', 'email2')
 dic_passageiros = {pass1.numero: pass1, pass2.numero: pass2}
 
@@ -16,12 +17,27 @@ email = values['email']
 cpf = values['cpf']
 #print('nome = ',nome, senha)
 deu_certo = True
+print(botoes)
+print(isinstance(cpf, int))
 if botoes == 0:
     print('encerrando')
+elif botoes == None:
+    print('encerrando')
+
 else:
     if nome == '' or senha == '' or data == '' or numero == '' or cpf == '':
         print('preencha todos os dados obrigatórios')
         deu_certo = False
+    elif len(cpf) != 11 and len(numero) != 9:
+        print('verifique os campos CPF e numero de celular')
+        deu_certo = False
+    else:
+        try: 
+            int(cpf) and int(numero)
+        except:
+            print('CPF e Numero de celular devem conter apenas numero')
+            deu_certo = False
+    
     for passageiros in dic_passageiros.values():
         if  passageiros.numero == numero or passageiros.cpf == cpf:
             print('numero ou cpf repetido')
@@ -31,20 +47,3 @@ else:
         dic_passageiros[values['numero']] = novo_passageiro
         print(dic_passageiros)
 
-
-#pass_antes = dic_passageiros[99]
-#print(pass_antes.nome)
-#b = TelaEditaPassageiro(pass2)
-#botoes, values = b.abrir()
-#if botoes == 0:
-#    print('encerrando')
-#else:
-#    nome = values['nome']
-#    senha = values['senha']
-#    data = values['data']
-#    numero = int(values['numero'])
-#    email = values['email']
-
-#    dic_passageiros.update({numero: Passageiro(nome, senha, data, numero, email)})
-#    pass_depois = dic_passageiros[99]
-#    print(pass_depois.nome)
