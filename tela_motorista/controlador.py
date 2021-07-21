@@ -1,7 +1,3 @@
-from logging import NullHandler, exception
-from tkinter.constants import CHAR
-
-from peewee import CharField
 from cadastra_motorista import TelaCadastraMotorista
 from motorista import Motorista
 
@@ -27,31 +23,38 @@ def validaString(valor):
     return any(chr.isdigit() for chr in valor)
 
 if nome == '' or senha == '' or cnh == '' or dtNascimento == '' or numero == '' or cpf == '' or modeloVeiculo == '' or anoVeiculo == '':
-    print('preencha todos os dados obrigatórios')
+    print('Preencha todos os dados obrigatórios')
     deu_certo = False
 
 if validaString(nome) or validaString(modeloVeiculo):
     print('Oops... Somente letras são válidas para NOME e MODELO DO VEÍCULO!')
+    deu_certo = False
 
 if not validaString(cnh) or not validaString(numero) or not validaString(cpf) or not validaString(anoVeiculo):
     print('Oops.. para os campos CNH, NÚMERO, CPF e ANO VEÍCULO, somente números são permitidos!')
+    deu_certo = False
+
+elif len(cpf) != 11 and len(numero) != 9:
+    print('CPF precisa ter EXATOS 11 dígitos e o número de celular precisa ter EXATOS 9 dígitos!')
+    deu_certo = False
 
 elif anoVeiculo < '2010':
     print('Ano do veículo inferior ao mínimo (2010). Sua solicitação foi recusada.')
     deu_certo = False
 
-if deu_certo == True:
-    # compara = 0
+if deu_certo:
     try:
-        compara = Motorista.get_by_id(cpf)
-        print(compara)
+        compara = Motorista.get(Motorista.cpf == cpf)
     except Exception:
+        print("CPF não registrado, prosseguindo...")
         try :
             comparaNumero = Motorista.get(Motorista.numero == numero)
         except Exception:
+            print("Número de telefone não registrado, prosseguindo...")
             try:
                 comparaCnh = Motorista.get(Motorista.cnh == cnh)
             except Exception:
+                print("CNH não encontrada, prosseguindo...")
                 Motorista.insert({
                     Motorista.nome:nome,
                     Motorista.senha:senha,

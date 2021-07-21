@@ -4,7 +4,7 @@ from playhouse.mysql_ext import MySQLConnectorDatabase
 db = MySQLConnectorDatabase('db_aps', host='localhost', port=3306, user='root', password='root')
 
 
-class Motorista(Model):
+class Usuario(Model):
 
     # def __init__(self, nome, senha, cnh, dtNascimento, numero, cpf, modeloVeiculo, anoVeiculo, email = ''):
     #     self.nome = nome
@@ -20,8 +20,8 @@ class Motorista(Model):
     nome=TextField()
     senha=TextField()
     cnh=TextField()
-    dtNascimento=DateField()
-    numero=IntegerField()
+    dtNascimento=TextField()
+    numero=TextField()
     cpf=BigIntegerField(primary_key=True)
     email=TextField(default=True)
     ativo=BooleanField()
@@ -30,8 +30,8 @@ class Motorista(Model):
     
     class Meta:
         database=db
-        db_table='Motorista'
+        db_table='Usuario'
 
 db.connect
-db.create_tables([Motorista])
+db.create_tables([Usuario])
 
